@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SpecificationProject.Domain.AutoMapper;
 using SpecificationProject.IoC;
+using SpecificationProject.Site.ViewModels;
 
 namespace SpecificationProject.Site
 {
@@ -26,6 +28,7 @@ namespace SpecificationProject.Site
         public void ConfigureServices(IServiceCollection services)
         {
             SpecificationProjectBootstrapper.Register(services);
+            AutoMapperConfig.Register<CustomerViewModel>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {

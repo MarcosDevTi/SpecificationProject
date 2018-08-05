@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using SpecificationProject.Domain;
 using SpecificationProject.Domain.Repositories;
 using SpecificationProject.Domain.Specification.Models;
+using SpecificationProject.Site.ViewModels;
 
 namespace SpecificationProject.Site.Controllers
 {
@@ -20,10 +21,16 @@ namespace SpecificationProject.Site.Controllers
 
         public IActionResult Index()
         {
+            var customersViewModel = _customerRepository.GetAll<CustomerViewModel>(
+                new CustomersGreaterThan18Years()
+                    .And(new EspecialCustomer()));
+
             var customers = _customerRepository.GetAll(
                 new CustomersGreaterThan18Years()
                     .And(new EspecialCustomer()));
-            return View(customers);
+
+
+            return View(customersViewModel);
         }
     }
 }
